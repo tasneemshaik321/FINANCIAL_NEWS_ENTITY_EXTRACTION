@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial News NER System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Financial News Named Entity Recognition</h1>
+            <p class="subtitle">Automated extraction of key financial entities from news articles</p>
+        </header>
+
+        <div class="main-content">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('analyze')">Analyze Text</button>
+                <button class="tab-button" onclick="switchTab('articles')">Browse Articles</button>
+            </div>
+
+            <!-- Analyze Text Tab -->
+            <div id="analyze-tab" class="tab-content active">
+                <div class="input-section">
+                    <h2>Enter Financial News Text</h2>
+                    <textarea id="text-input" placeholder="Paste your financial news article here..."></textarea>
+                    <button class="analyze-btn" onclick="analyzeText()">Analyze Entities</button>
+                </div>
+
+                <div id="results-section" class="results-section hidden">
+                    <h2>Analysis Results</h2>
+                    
+                    <!-- Display entered text -->
+                    <div class="entered-text-section">
+                        <h3>📝 Your Entered Text:</h3>
+                        <div id="entered-text-display" class="entered-text-display"></div>
+                    </div>
+                    
+                    <h2>Extracted Entities</h2>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="card-value" id="total-entities">0</div>
+                            <div class="card-label">Total Entities</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-value" id="org-count">0</div>
+                            <div class="card-label">Organizations</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-value" id="money-count">0</div>
+                            <div class="card-label">Monetary Values</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-value" id="person-count">0</div>
+                            <div class="card-label">Persons</div>
+                        </div>
+                    </div>
+
+                    <div id="entities-container" class="entities-container"></div>
+                </div>
+            </div>
+
+            <!-- Browse Articles Tab -->
+            <div id="articles-tab" class="tab-content">
+                <div class="articles-section">
+                    <h2>Financial News Articles</h2>
+                    <div id="articles-list" class="articles-list">
+                        <div class="loading">Loading articles...</div>
+                    </div>
+                </div>
+
+                <div id="article-detail" class="article-detail hidden">
+                    <button class="back-btn" onclick="showArticlesList()">← Back to Articles</button>
+                    <h2 id="article-title"></h2>
+                    <div class="article-meta">
+                        <span id="article-date"></span>
+                    </div>
+                    <div id="article-text" class="article-text"></div>
+                    <div id="article-entities" class="article-entities"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
